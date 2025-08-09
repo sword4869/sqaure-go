@@ -5,6 +5,7 @@ import (
 	"test/store"
 
 	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
 )
 
 // @Router /user/new_random_user [post]
@@ -18,11 +19,13 @@ func NewRandomUser(c *gin.Context) {
 	user := store.NewUser()
 	err := user.CreateUser()
 	if err != nil {
+		logrus.Error(err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	userRsp, err := user.GetUserAvatarById(user.Id)
 	if err != nil {
+		logrus.Error(err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
@@ -44,11 +47,13 @@ type GetUserByIDRequest struct {
 func GetUserByID(c *gin.Context) {
 	var req GetUserByIDRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
+		logrus.Error(err)
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 	userRsp, err := store.NewUser().GetUserAvatarById(req.Id)
 	if err != nil {
+		logrus.Error(err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}

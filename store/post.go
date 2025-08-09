@@ -14,7 +14,7 @@ type Post struct {
 	UserId    int      `db:"user_id" json:"user_id" binding:"required" example:"1"`
 	PostTags  PostTags `db:"post_tags" json:"post_tags" binding:"required" example:"1,2,3"`
 	Content   string   `db:"content" json:"content" binding:"required" example:"1"`
-	Images    Images   `db:"images" json:"images" example:"1.jpg,2.jpg"`
+	Images    Images   `db:"images" json:"images" example:"1,2"`
 	Latitude  float64  `db:"latitude" json:"latitude" example:"120.123456"`
 	Longitude float64  `db:"longitude" json:"longitude" example:"30.123456"`
 	IsActive  int      `db:"is_active" json:"is_active" example:"1"` // 是否展示 0 不展示 1 展示
@@ -29,7 +29,7 @@ func NewPost() *Post {
 	}
 }
 
-type Images []string
+type Images []int64
 
 func (i *Images) Scan(value interface{}) error {
 	return json.Unmarshal(value.([]byte), i)

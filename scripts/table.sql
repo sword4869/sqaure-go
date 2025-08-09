@@ -89,6 +89,6 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- 图片表
 CREATE TABLE IF NOT EXISTS `imgs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `base64` text NOT NULL COMMENT '图片base64',
+  `base64` longtext NOT NULL COMMENT '图片base64',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='图片表';
