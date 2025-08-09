@@ -10,6 +10,7 @@ import (
 )
 
 type PostVO struct {
+	Id        int      `json:"id" example:"1"`
 	UserId    int      `json:"user_id" binding:"required" example:"1"`
 	PostTags  []int    `json:"post_tags" binding:"required" example:"1,2,3"`
 	Content   string   `json:"content" binding:"required" example:"1"`
@@ -64,10 +65,7 @@ func CreatePost(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(http.StatusOK, gin.H{
-		"message": "发帖成功",
-		"data":    post,
-	})
+	ctx.JSON(http.StatusOK, postToPostVO(post))
 }
 
 type ListPostsParams struct {
@@ -219,6 +217,7 @@ func postToPostVO(post *store.Post) PostVO {
 		images = append(images, imgBase64)
 	}
 	return PostVO{
+		Id:        post.Id,
 		UserId:    post.UserId,
 		PostTags:  post.PostTags,
 		Content:   post.Content,

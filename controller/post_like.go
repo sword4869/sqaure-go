@@ -5,6 +5,7 @@ import (
 	"test/store"
 
 	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
 )
 
 type PostLikeGetParams struct {
@@ -28,6 +29,7 @@ type PostLikeGetResponse struct {
 func PostLikeGet(ctx *gin.Context) {
 	var params PostLikeGetParams
 	if err := ctx.ShouldBind(&params); err != nil {
+		logrus.Error(err)
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"message": "JSON格式错误: " + err.Error(),
 		})
@@ -36,6 +38,7 @@ func PostLikeGet(ctx *gin.Context) {
 
 	postLike, err := store.NewPostLike().GetByUserIdAndPostId(params.UserId, params.PostId)
 	if err != nil {
+		logrus.Error(err)
 		ctx.JSON(http.StatusInternalServerError, gin.H{
 			"message": "获取发帖点赞失败: " + err.Error(),
 		})
