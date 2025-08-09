@@ -93,7 +93,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/store.Post"
+                            "$ref": "#/definitions/controller.PostVO"
                         }
                     }
                 ],
@@ -101,7 +101,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/store.Post"
+                            "$ref": "#/definitions/controller.PostVO"
                         }
                     }
                 }
@@ -408,7 +408,7 @@ const docTemplate = `{
                     "description": "发帖",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/store.Post"
+                            "$ref": "#/definitions/controller.PostVO"
                         }
                     ]
                 }
@@ -575,7 +575,7 @@ const docTemplate = `{
                 }
             }
         },
-        "store.Post": {
+        "controller.PostVO": {
             "type": "object",
             "required": [
                 "content",
@@ -587,9 +587,6 @@ const docTemplate = `{
                     "type": "string",
                     "example": "1"
                 },
-                "created_at": {
-                    "type": "integer"
-                },
                 "id": {
                     "type": "integer",
                     "example": 1
@@ -600,26 +597,13 @@ const docTemplate = `{
                         "type": "string"
                     },
                     "example": [
-                        "1.jpg",
-                        "2.jpg"
+                        "1",
+                        "2"
                     ]
-                },
-                "is_active": {
-                    "description": "是否展示 0 不展示 1 展示",
-                    "type": "integer",
-                    "example": 1
-                },
-                "latitude": {
-                    "type": "number",
-                    "example": 120.123456
                 },
                 "like_count": {
                     "type": "integer",
                     "example": 0
-                },
-                "longitude": {
-                    "type": "number",
-                    "example": 30.123456
                 },
                 "post_tags": {
                     "type": "array",
@@ -631,9 +615,6 @@ const docTemplate = `{
                         2,
                         3
                     ]
-                },
-                "updated_at": {
-                    "type": "integer"
                 },
                 "user_id": {
                     "type": "integer",
@@ -669,7 +650,7 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1234.0",
-	Host:             "localhost:8080",
+	Host:             "http://api-love-dev-zxm.qingteng-inc.com:6190",
 	BasePath:         "",
 	Schemes:          []string{},
 	Title:            "--Swagger Example API",

@@ -188,6 +188,7 @@ type GetPostByIdResponse struct {
 func GetPostById(ctx *gin.Context) {
 	var params GetPostByIdParams
 	if err := ctx.ShouldBind(&params); err != nil {
+		logrus.Error(err)
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"message": "JSON格式错误: " + err.Error(),
 		})
@@ -195,6 +196,7 @@ func GetPostById(ctx *gin.Context) {
 	}
 	post, err := store.NewPost().GetById(params.PostId)
 	if err != nil {
+		logrus.Error(err)
 		ctx.JSON(http.StatusInternalServerError, gin.H{
 			"message": "获取发帖失败: " + err.Error(),
 		})

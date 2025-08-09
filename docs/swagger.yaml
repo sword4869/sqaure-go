@@ -29,7 +29,7 @@ definitions:
     properties:
       post:
         allOf:
-        - $ref: '#/definitions/store.Post'
+        - $ref: '#/definitions/controller.PostVO'
         description: 发帖
     type: object
   controller.GetRatingsAveParams:
@@ -149,36 +149,24 @@ definitions:
     - post_id
     - user_id
     type: object
-  store.Post:
+  controller.PostVO:
     properties:
       content:
         example: "1"
         type: string
-      created_at:
-        type: integer
       id:
         example: 1
         type: integer
       images:
         example:
-        - 1.jpg
-        - 2.jpg
+        - "1"
+        - "2"
         items:
           type: string
         type: array
-      is_active:
-        description: 是否展示 0 不展示 1 展示
-        example: 1
-        type: integer
-      latitude:
-        example: 120.123456
-        type: number
       like_count:
         example: 0
         type: integer
-      longitude:
-        example: 30.123456
-        type: number
       post_tags:
         example:
         - 1
@@ -187,8 +175,6 @@ definitions:
         items:
           type: integer
         type: array
-      updated_at:
-        type: integer
       user_id:
         example: 1
         type: integer
@@ -209,7 +195,7 @@ definitions:
         example: 春日收藏家
         type: string
     type: object
-host: localhost:8080
+host: http://api-love-dev-zxm.qingteng-inc.com:6190
 info:
   contact: {}
   license:
@@ -264,14 +250,14 @@ paths:
         name: post
         required: true
         schema:
-          $ref: '#/definitions/store.Post'
+          $ref: '#/definitions/controller.PostVO'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/store.Post'
+            $ref: '#/definitions/controller.PostVO'
       summary: 创建发帖
       tags:
       - posts

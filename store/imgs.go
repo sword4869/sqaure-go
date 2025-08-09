@@ -2,6 +2,7 @@ package store
 
 import (
 	"database/sql"
+	"math/rand"
 	"test/config"
 )
 
@@ -26,12 +27,22 @@ func (i *Img) GetImgBase64ById(id int64) (string, error) {
 	return base64, nil
 }
 
+func (i *Img) GetImgById(id int64) (*Img, error) {
+	img := &Img{}
+	if err := config.Db.Unsafe().Get(img, "SELECT * FROM "+i.TableName()+" WHERE id = ?", id); err != nil && err != sql.ErrNoRows {
+		return img, err
+	}
+	return img, nil
+}
+
 func (i *Img) GetRandomImgId() (int64, error) {
-	var id int64
-	if err := config.Db.Unsafe().Get(&id, "SELECT id FROM "+i.TableName()+" ORDER BY RAND() LIMIT 1"); err != nil && err != sql.ErrNoRows {
+	// 随机获取 [10, 17] 之间的图片
+	id := rand.Int63n(17-10+1) + 10
+	img, err := i.GetImgById(id)
+	if err != nil {
 		return 0, err
 	}
-	return id, nil
+	return img.Id, nil
 }
 
 func (i *Img) CreateImg() error {

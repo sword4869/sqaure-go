@@ -8,7 +8,7 @@
         },
         "version": "1234.0"
     },
-    "host": "localhost:8080",
+    "host": "http://api-love-dev-zxm.qingteng-inc.com:6190",
     "paths": {
         "/post_like/get": {
             "post": {
@@ -85,7 +85,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/store.Post"
+                            "$ref": "#/definitions/controller.PostVO"
                         }
                     }
                 ],
@@ -93,7 +93,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/store.Post"
+                            "$ref": "#/definitions/controller.PostVO"
                         }
                     }
                 }
@@ -400,7 +400,7 @@
                     "description": "发帖",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/store.Post"
+                            "$ref": "#/definitions/controller.PostVO"
                         }
                     ]
                 }
@@ -567,7 +567,7 @@
                 }
             }
         },
-        "store.Post": {
+        "controller.PostVO": {
             "type": "object",
             "required": [
                 "content",
@@ -579,9 +579,6 @@
                     "type": "string",
                     "example": "1"
                 },
-                "created_at": {
-                    "type": "integer"
-                },
                 "id": {
                     "type": "integer",
                     "example": 1
@@ -592,26 +589,13 @@
                         "type": "string"
                     },
                     "example": [
-                        "1.jpg",
-                        "2.jpg"
+                        "1",
+                        "2"
                     ]
-                },
-                "is_active": {
-                    "description": "是否展示 0 不展示 1 展示",
-                    "type": "integer",
-                    "example": 1
-                },
-                "latitude": {
-                    "type": "number",
-                    "example": 120.123456
                 },
                 "like_count": {
                     "type": "integer",
                     "example": 0
-                },
-                "longitude": {
-                    "type": "number",
-                    "example": 30.123456
                 },
                 "post_tags": {
                     "type": "array",
@@ -623,9 +607,6 @@
                         2,
                         3
                     ]
-                },
-                "updated_at": {
-                    "type": "integer"
                 },
                 "user_id": {
                     "type": "integer",
