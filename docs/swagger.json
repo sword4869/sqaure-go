@@ -1,0 +1,659 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "--Swagger Example API",
+        "contact": {},
+        "license": {
+            "name": "Apache 2.0"
+        },
+        "version": "1234.0"
+    },
+    "host": "localhost:8080",
+    "paths": {
+        "/post_like/get": {
+            "post": {
+                "description": "0 未点赞, 1 已点赞",
+                "tags": [
+                    "post_like"
+                ],
+                "summary": "获取当前用户对指定帖子的点赞状态",
+                "parameters": [
+                    {
+                        "description": "参数",
+                        "name": "p",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controller.PostLikeGetParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回结果",
+                        "schema": {
+                            "$ref": "#/definitions/controller.PostLikeGetResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/post_like/update_liked": {
+            "post": {
+                "description": "0 取消点赞, 1 点赞",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "post_like"
+                ],
+                "summary": "更新当前用户对指定帖子的点赞状态",
+                "parameters": [
+                    {
+                        "description": "参数",
+                        "name": "p",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controller.PostLikeUpdateLikedParams"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/posts/create": {
+            "post": {
+                "description": "创建发帖",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "posts"
+                ],
+                "summary": "创建发帖",
+                "parameters": [
+                    {
+                        "description": "发帖信息",
+                        "name": "post",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/store.Post"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/store.Post"
+                        }
+                    }
+                }
+            }
+        },
+        "/posts/get_by_id": {
+            "post": {
+                "description": "获取单个发帖",
+                "tags": [
+                    "posts"
+                ],
+                "summary": "获取单个发帖",
+                "parameters": [
+                    {
+                        "description": "获取单个发帖信息",
+                        "name": "post",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controller.GetPostByIdParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controller.GetPostByIdResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/posts/list": {
+            "post": {
+                "description": "获取所有发帖列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "posts"
+                ],
+                "summary": "获取所有发帖列表",
+                "parameters": [
+                    {
+                        "description": "发帖信息",
+                        "name": "post",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controller.ListPostsParams"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/posts/list_by_keyword": {
+            "post": {
+                "description": "通过关键字获取发帖列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "posts"
+                ],
+                "summary": "通过关键字获取发帖列表",
+                "parameters": [
+                    {
+                        "description": "通过关键字获取发帖列表信息",
+                        "name": "post",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controller.ListPostsByKeywordParams"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/ratings/create": {
+            "post": {
+                "description": "用户对帖子评分",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ratings"
+                ],
+                "summary": "用户对帖子评分",
+                "parameters": [
+                    {
+                        "description": "参数示例",
+                        "name": "p",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controller.CreateRatingsParams"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/ratings/get": {
+            "post": {
+                "description": "获取用户对帖子的评分",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ratings"
+                ],
+                "summary": "获取用户对帖子的评分",
+                "parameters": [
+                    {
+                        "description": "参数示例",
+                        "name": "p",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controller.GetRatingsParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controller.GetRatingsResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/ratings/get_ave": {
+            "post": {
+                "description": "获取帖子评分平均值",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ratings"
+                ],
+                "summary": "获取帖子评分平均值",
+                "parameters": [
+                    {
+                        "description": "参数示例",
+                        "name": "p",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controller.GetRatingsAveParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controller.GetRatingsAveResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/tags/list": {
+            "post": {
+                "description": "获取标签列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tags"
+                ],
+                "summary": "获取标签列表",
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/get_by_id": {
+            "post": {
+                "description": "获取指定用户",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "获取指定用户",
+                "parameters": [
+                    {
+                        "description": "获取指定用户",
+                        "name": "id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controller.GetUserByIDRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/store.UserRsp"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/new_random_user": {
+            "post": {
+                "description": "获取随机新用户",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "获取随机新用户",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/store.UserRsp"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "controller.CreateRatingsParams": {
+            "type": "object",
+            "required": [
+                "post_id",
+                "rating",
+                "user_id"
+            ],
+            "properties": {
+                "post_id": {
+                    "description": "帖子ID",
+                    "type": "integer",
+                    "example": 1
+                },
+                "rating": {
+                    "description": "评分 -5 ~ 5",
+                    "type": "integer",
+                    "example": 5
+                },
+                "user_id": {
+                    "description": "用户ID",
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
+        "controller.GetPostByIdParams": {
+            "type": "object",
+            "properties": {
+                "post_id": {
+                    "description": "发帖ID",
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
+        "controller.GetPostByIdResponse": {
+            "type": "object",
+            "properties": {
+                "post": {
+                    "description": "发帖",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/store.Post"
+                        }
+                    ]
+                }
+            }
+        },
+        "controller.GetRatingsAveParams": {
+            "type": "object",
+            "required": [
+                "post_id"
+            ],
+            "properties": {
+                "post_id": {
+                    "description": "帖子ID",
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
+        "controller.GetRatingsAveResponse": {
+            "type": "object",
+            "properties": {
+                "post_id": {
+                    "description": "帖子ID",
+                    "type": "integer",
+                    "example": 1
+                },
+                "rating_ave": {
+                    "description": "平均评分",
+                    "type": "number",
+                    "example": 5
+                },
+                "rating_count": {
+                    "description": "评分总人数",
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
+        "controller.GetRatingsParams": {
+            "type": "object",
+            "required": [
+                "post_id",
+                "user_id"
+            ],
+            "properties": {
+                "post_id": {
+                    "description": "帖子ID",
+                    "type": "integer",
+                    "example": 1
+                },
+                "user_id": {
+                    "description": "用户ID",
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
+        "controller.GetRatingsResponse": {
+            "type": "object",
+            "properties": {
+                "post_id": {
+                    "description": "帖子ID",
+                    "type": "integer",
+                    "example": 1
+                },
+                "rating": {
+                    "description": "评分",
+                    "type": "integer",
+                    "example": 5
+                },
+                "user_id": {
+                    "description": "用户ID",
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
+        "controller.GetUserByIDRequest": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "id": {
+                    "description": "用户ID",
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
+        "controller.ListPostsByKeywordParams": {
+            "type": "object",
+            "properties": {
+                "cursor": {
+                    "type": "integer",
+                    "example": 0
+                },
+                "keyword": {
+                    "description": "关键字，可选",
+                    "type": "string",
+                    "example": ""
+                }
+            }
+        },
+        "controller.ListPostsParams": {
+            "type": "object",
+            "properties": {
+                "cursor": {
+                    "type": "integer",
+                    "example": 0
+                }
+            }
+        },
+        "controller.PostLikeGetParams": {
+            "type": "object",
+            "required": [
+                "post_id",
+                "user_id"
+            ],
+            "properties": {
+                "post_id": {
+                    "description": "帖子ID",
+                    "type": "integer",
+                    "example": 1
+                },
+                "user_id": {
+                    "description": "用户ID",
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
+        "controller.PostLikeGetResponse": {
+            "type": "object",
+            "properties": {
+                "is_like": {
+                    "description": "是否点赞: 0 未点赞, 1 已点赞",
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
+        "controller.PostLikeUpdateLikedParams": {
+            "type": "object",
+            "required": [
+                "post_id",
+                "user_id"
+            ],
+            "properties": {
+                "is_like": {
+                    "description": "是否点赞: 0 取消点赞, 1 点赞",
+                    "type": "integer",
+                    "example": 1
+                },
+                "post_id": {
+                    "description": "帖子ID",
+                    "type": "integer",
+                    "example": 1
+                },
+                "user_id": {
+                    "description": "用户ID",
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
+        "store.Post": {
+            "type": "object",
+            "required": [
+                "content",
+                "post_tags",
+                "user_id"
+            ],
+            "properties": {
+                "content": {
+                    "type": "string",
+                    "example": "1"
+                },
+                "created_at": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "images": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "1.jpg",
+                        "2.jpg"
+                    ]
+                },
+                "is_active": {
+                    "description": "是否展示 0 不展示 1 展示",
+                    "type": "integer",
+                    "example": 1
+                },
+                "latitude": {
+                    "type": "number",
+                    "example": 120.123456
+                },
+                "like_count": {
+                    "type": "integer",
+                    "example": 0
+                },
+                "longitude": {
+                    "type": "number",
+                    "example": 30.123456
+                },
+                "post_tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    },
+                    "example": [
+                        1,
+                        2,
+                        3
+                    ]
+                },
+                "updated_at": {
+                    "type": "integer"
+                },
+                "user_id": {
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
+        "store.UserRsp": {
+            "type": "object",
+            "properties": {
+                "avatar": {
+                    "type": "string",
+                    "example": "https://example.com/avatar.png"
+                },
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "user_name": {
+                    "type": "string",
+                    "example": "春日收藏家"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "BasicAuth": {
+            "type": "basic"
+        }
+    }
+}
