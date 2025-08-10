@@ -13,6 +13,7 @@ func Router() *gin.Engine {
 	// 标签相关路由
 	api := router.Group("/api")
 	{
+		api.GET("/test", Test)
 		// 用户相关路由
 		user := api.Group("/user")
 		{
@@ -52,4 +53,8 @@ func Router() *gin.Engine {
 	}
 
 	return router
+}
+
+func Test(c *gin.Context) {
+	c.JSON(200, gin.H{"message": "test"})
 }
