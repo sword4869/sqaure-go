@@ -1,3 +1,7 @@
+create database if not exists `square`;
+
+use `square`;
+
 -- Tags table
 CREATE TABLE IF NOT EXISTS `tags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
